@@ -1,12 +1,12 @@
 {
-  "name": "proj",
+  "name": "secure-sqlite",
   "version": "1.0.0",
-  "description": "to be changed",
-  "main": "index.js",
+  "description": "A basic package and interface for SQLite that guards against SQL injections",
+  "main": "lib.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Kevin Zhao",
   "license": "ISC",
   "dependencies": {
     "ffi-napi": "^4.0.3",
