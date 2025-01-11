@@ -98,14 +98,8 @@ function sql(strings, ...vals){
     return db.query(strings[0]);
   }
   else{
-    ret = strings[0];
+    ret = strings.join("?");
     bind_array = vals;
-    for (let i = 0; i < vals.length; i++){
-      ret += "?";
-      if (i + 1 >= strings.length){
-        ret += strings[i + 1];
-      }
-    }
     return db.query(ret, bind_array);
   }
 }
