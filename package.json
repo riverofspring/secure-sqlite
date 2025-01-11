@@ -1,6 +1,6 @@
 {
   "name": "secure-sqlite",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A basic package and interface for SQLite that guards against SQL injections",
   "main": "lib.js",
   "scripts": {
