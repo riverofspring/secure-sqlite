@@ -34,7 +34,8 @@ const _lib = ffi.Library('libsqlite3', {
   'sqlite3_column_double': ['double', [sqlstatementPtr, 'int']],
   'sqlite3_bind_double': ['int', [sqlstatementPtr, 'int', 'double']],
   'sqlite3_bind_int': ['int', [sqlstatementPtr, 'int', 'double']],
-  'sqlite3_bind_text': ['int', [sqlstatementPtr, 'int', 'string', 'int', 'long long']]
+  'sqlite3_bind_text': ['int', [sqlstatementPtr, 'int', 'string', 'int', 'long long']],
+  'sqlite3_finalize': ['int', [sqlite3Ptr]]
 });
  
 // eventually, your code should be structured into this class
@@ -86,6 +87,7 @@ class SQLite {
       }
       ret.push(obj);
     }
+    _lib.sqlite3_finalize(res.deref());
     return ret;
   }
 }
@@ -95,12 +97,14 @@ function init(filename = ':memory:'){
 }
 function sql(strings, ...vals){
   if (vals.length == 0){
-    return db.query(strings[0]);
+    ret = db.query(strings[0])
+    return ret;
   }
   else{
     ret = strings.join("?");
     bind_array = vals;
-    return db.query(ret, bind_array);
+    ret_val =  db.query(ret, bind_array);
+    return ret_val;
   }
 }
 module.exports = {init, sql}
